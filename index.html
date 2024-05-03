@@ -5,10 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Six-Point Checklist</title>
   <style>
+    @font-face {
+      font-family: myComicSans;
+      src: url("COMICSANS.TTF")
+    }
     html {
       background-image: radial-gradient(circle at 5px 5px, rgb(164, 177, 231) 1px, transparent 3%);
       background-size: 18px 18px;
       background-attachment: fixed;
+    }
+    button {
+      cursor: pointer;
     }
     body {
       /* background-image: radial-gradient(circle at 5px 5px, rgb(164, 177, 231) 1px, transparent 6%);
@@ -42,17 +49,69 @@
       max-width: 80%;
       margin: 0 auto;
     }
-    sup {
-      /* font-size: x-small; */
-    }
     .emoji {
       text-align: center;
       font-size: 100px;
       margin: 0 0 20px 0;
     }
+    
+    .rainbow-text {
+      background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: rainbow_animation 0.5s linear infinite;
+      background-size: 400% 100%;
+      font-family: myComicSans;
+    }
+    
+    /* h1, h2, p, sup {
+      background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: rainbow_animation 1s linear infinite;
+      background-size: 400% 100%;
+      font-family: myComicSans;
+    } */
+    
+    @keyframes rainbow_animation {
+        0% {
+            background-position: 0 0;
+        }
+
+        100% {
+            background-position: 66% 0;
+        }
+    }
   </style>
+  <script>
+    function makeRainbowByTag(tag){
+      let elements = document.getElementsByTagName(tag)
+      for(let i in elements){
+        elements[i].className += " rainbow-text"
+      }
+    }
+    
+    function toggleURLRainbow(){
+      if(window.location.href.includes("?rcsp")){
+        window.location.href = window.location.href.split("?")[0]
+      } else {
+        window.location.href = window.location.href + "?rcsp"
+      }
+    }
+    
+    function onLoad(){
+      if(window.location.href.includes("?rcsp")){ //Rainbow comic sans party
+        let tagsToRainbowify = ["p", "h1", "h2", "h3", "a", "label"]
+        for(let i in tagsToRainbowify){
+          makeRainbowByTag(tagsToRainbowify[i])
+        }
+      }
+    }
+  </script>
 </head>
-<body>
+<body onload="onLoad()">
   <p class="emoji">✎</p>
   <h1>The Six-Point Checklist<br><span style="font-size:medium;font-weight:100;">for Faculty Job Satisfaction</span></h1>
   <h2>About</h2>
@@ -159,5 +218,7 @@
   <p>Pointing out these kinds of solutions may not seem very helpful, since it already goes without saying that changes like these would benefit students and faculty. The reality is that educational institutions have limited money and resources, and they can’t afford to throw money at every problem.</p>
   <p>However, if administration needs any more reasons to consider any of these funding solutions, it’s valuable to know that instructors’ job satisfaction, perceived meaningfulness of work, and burnout are all factors to add to the list of reasons.</p>
   <p>Additionally, armed with the knowledge that all six of the points on the six-point checklist—including the funding solutions—address the true roots of the problems plaguing job satisfaction for instructors, educational organizations can recognize that looking for solutions that don’t address the roots of these problems may not be a good use of time and resources. Knowing which solutions are not effective is still actionable knowledge.</p>
+  <br><br>
+  <button onclick="toggleURLRainbow()" class="rainbow-text">Click here to improve this website</button>
 </body>
 </html>
